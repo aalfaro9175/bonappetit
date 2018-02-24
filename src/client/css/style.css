@@ -6,6 +6,7 @@
   max-height: 0;
   padding: 0 !important;
 }
+
 .order-enter.order-enter-active {
   max-height: 60px;
   padding: 2rem 0 !important;
@@ -341,7 +342,6 @@ header.top h3:after {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
-  overflow: scroll;
 }
 .catch-of-the-day > *:first-child {
   -ms-flex-negative: 1;
@@ -490,7 +490,7 @@ ul.order li span.count span {
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
 }
-.menu-fish {
+.menu-dish {
   border-bottom: 2px solid #000;
   border-top: 1px solid #000;
   padding-bottom: 2rem;
@@ -499,11 +499,11 @@ ul.order li span.count span {
   clear: both;
   overflow: hidden;
 }
-.menu-fish p {
+.menu-dish p {
   margin: 0;
   font-size: 1.8rem;
 }
-.menu-fish .fish-name {
+.menu-dish .dish-name {
   margin: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -515,13 +515,13 @@ ul.order li span.count span {
       -ms-flex-align: center;
           align-items: center;
 }
-.menu-fish .price {
+.menu-dish .price {
   font-size: 1.4rem;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
-.menu-fish img {
+.menu-dish img {
   float: left;
   width: 150px;
   margin-right: 1rem;
@@ -646,5 +646,5 @@ input[type=submit].twitter:after {
 }
 
 .menu {
-  overflow: hidden;
+  overflow-x: hidden !important;
 }
