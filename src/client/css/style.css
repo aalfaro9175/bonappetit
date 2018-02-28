@@ -646,5 +646,5 @@ input[type=submit].twitter:after {
 }
 
 .menu {
-  overflow: hidden;
+  overflow: scroll;
 }

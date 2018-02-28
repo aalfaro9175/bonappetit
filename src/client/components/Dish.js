@@ -7,7 +7,7 @@ export default class Dish extends Component {
     const isAvailable = status === 'available'
     const buttonText = isAvailable ? 'Agregar a Orden' : 'Agotado!'
     return (
-      <li className="menu-dish">
+      <li className="menu-fish">
         <img src={image} alt={name} />
         <h3 className="dish-name">
           {name}
