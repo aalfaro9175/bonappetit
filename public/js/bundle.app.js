@@ -39480,10 +39480,15 @@ var App = function (_Component) {
     }, _this.componentWillUpdate = function (nextProps, nextState) {
       localStorage.setItem('order-' + _this.props.match.params.id, JSON.stringify(nextState.order));
     }, _this.addDish = function (dish) {
-      var dishes = [].concat(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray___default()(_this.state.dishes));
-      dishes.push(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, dish, { id: __WEBPACK_IMPORTED_MODULE_8_simple_id___default()(5) }));
+      __WEBPACK_IMPORTED_MODULE_9_axios___default.a.post('/api/dishes', dish).then(function (_ref3) {
+        var dishCreated = _ref3.data;
 
-      _this.setState({ dishes: dishes });
+        var dishes = [].concat(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray___default()(_this.state.dishes));
+        dishes.push(dishCreated);
+        _this.setState({ dishes: dishes });
+      }).catch(function (err) {
+        return console.log('Ohhh no ha ocurrido algo \uD83D\uDE2E ' + err);
+      });
     }, _this.updateDish = function (dishes) {
       _this.setState({ dishes: dishes });
     }, _this.deleteDish = function (dishId) {
@@ -39527,9 +39532,9 @@ var App = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_7_react___default.a.createElement(
             'ul',
             { className: 'list-of-dishes' },
-            this.state.dishes.map(function (_ref3) {
-              var id = _ref3.id,
-                  details = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties___default()(_ref3, ['id']);
+            this.state.dishes.map(function (_ref4) {
+              var id = _ref4.id,
+                  details = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties___default()(_ref4, ['id']);
 
               return __WEBPACK_IMPORTED_MODULE_7_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_13__Dish__["a" /* default */], {
                 key: id,
@@ -40797,7 +40802,6 @@ $export($export.S, 'Object', { create: __webpack_require__(/*! ./_object-create 
   !*** ./node_modules/simple-id/index.js ***!
   \*****************************************/
 /*! dynamic exports provided */
-/*! exports used: default */
 /***/ (function(module, exports, __webpack_require__) {
 
 const crypto = __webpack_require__(/*! crypto */ 266);

@@ -38,10 +38,14 @@ export default class App extends Component {
   }
 
   addDish = dish => {
-    const dishes = [...this.state.dishes]
-    dishes.push({ ...dish, id: shortId(5) })
-
-    this.setState({ dishes })
+    axios
+      .post('/api/dishes', dish)
+      .then(({ data: dishCreated }) => {
+        const dishes = [...this.state.dishes]
+        dishes.push(dishCreated)
+        this.setState({ dishes })
+      })
+      .catch(err => console.log(`Ohhh no ha ocurrido algo 😮 ${err}`))
   }
 
   updateDish = dishes => {
