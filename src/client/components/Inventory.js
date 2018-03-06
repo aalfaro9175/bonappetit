@@ -50,6 +50,9 @@ export default class Inventory extends Component {
         value={image}
         placeholder="Imagen del Platillo"
       />
+      <button onClick={() => this.props.deleteDish(id)}>
+        Eliminar Platillo
+      </button>
     </div>
   )
 

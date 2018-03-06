@@ -20,6 +20,7 @@ const OrderItem = (props, dishId) => {
         {count} {dish.name}
       </span>
       <span className="price">{formatPrice(count * dish.price)}</span>
+      <button onClick={() => props.removeFromOrder(dishId)}>&times;</button>
     </li>
   )
 }

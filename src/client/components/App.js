@@ -48,6 +48,16 @@ export default class App extends Component {
     this.setState({ dishes })
   }
 
+  deleteDish = dishId => {
+    const dishes = [...this.state.dishes]
+    const dishIndex = dishes.findIndex(dish => dish.id === dishId)
+
+    if (dishIndex > -1) {
+      dishes.splice(dishIndex, 1)
+      this.setState({ dishes })
+    }
+  }
+
   loadDishes = () => {
     this.setState({
       dishes: sampleDishes,
@@ -57,6 +67,13 @@ export default class App extends Component {
   addToOrder = dishId => {
     const order = { ...this.state.order }
     order[dishId] = order[dishId] + 1 || 1
+    this.setState({ order })
+  }
+
+  removeFromOrder = dishId => {
+    const order = { ...this.state.order }
+    delete order[dishId]
+
     this.setState({ order })
   }
 
@@ -77,12 +94,17 @@ export default class App extends Component {
             ))}
           </ul>
         </div>
-        <Order dishes={this.state.dishes} order={this.state.order} />
+        <Order
+          dishes={this.state.dishes}
+          order={this.state.order}
+          removeFromOrder={this.removeFromOrder}
+        />
         <Inventory
           addDish={this.addDish}
           loadDishes={this.loadDishes}
           dishes={this.state.dishes}
           updateDish={this.updateDish}
+          deleteDish={this.deleteDish}
         />
       </div>
     )
