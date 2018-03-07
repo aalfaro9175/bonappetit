@@ -4,7 +4,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { formatPrice } from '../utils/helpers'
 
 const OrderItem = (props, dishId) => {
-  const dish = props.dishes.find(dishItem => dishItem.id === dishId)
+  const dish = props.dishes.find(dishItem => dishItem.id === Number(dishId))
   const count = props.order[dishId]
   const transitionOptions = {
     classNames: 'order',
@@ -25,20 +25,18 @@ const OrderItem = (props, dishId) => {
   return (
     <CSSTransition {...transitionOptions}>
       <li key={dishId}>
-        <span>
-          <TransitionGroup component="span" className="count">
-            <CSSTransition
-              classNames="count"
-              key={count}
-              timeout={{ enter: 500, exit: 500 }}
-            >
-              <span>{count}</span>
-            </CSSTransition>
-          </TransitionGroup>
-          {dish.name}
-          <span className="price">{formatPrice(count * dish.price)}</span>
-          <button onClick={() => props.removeFromOrder(dishId)}>&times;</button>
-        </span>
+        <TransitionGroup component="span" className="count">
+          <CSSTransition
+            classNames="count"
+            key={count}
+            timeout={{ enter: 500, exit: 0 }}
+          >
+            <span>{count}</span>
+          </CSSTransition>
+        </TransitionGroup>
+        {dish.name}
+        <span className="price">{formatPrice(count * dish.price)}</span>
+        <button onClick={() => props.removeFromOrder(dishId)}>&times;</button>
       </li>
     </CSSTransition>
   )
@@ -47,7 +45,7 @@ const OrderItem = (props, dishId) => {
 const Order = props => {
   const orderIds = Object.keys(props.order)
   const total = orderIds.reduce((prevTotal, dishId) => {
-    const dish = props.dishes.find(dishItem => dishItem.id === dishId)
+    const dish = props.dishes.find(dishItem => dishItem.id === Number(dishId))
     const count = props.order[dishId]
     const isAvailable = dish && dish.status === 'available'
 

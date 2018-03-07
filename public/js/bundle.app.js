@@ -52332,7 +52332,7 @@ var Header = function Header(props) {
 
 var OrderItem = function OrderItem(props, dishId) {
   var dish = props.dishes.find(function (dishItem) {
-    return dishItem.id === dishId;
+    return dishItem.id === Number(dishId);
   });
   var count = props.order[dishId];
   var transitionOptions = {
@@ -52362,38 +52362,34 @@ var OrderItem = function OrderItem(props, dishId) {
       'li',
       { key: dishId },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'span',
-        null,
+        __WEBPACK_IMPORTED_MODULE_1_react_transition_group__["TransitionGroup"],
+        { component: 'span', className: 'count' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_react_transition_group__["TransitionGroup"],
-          { component: 'span', className: 'count' },
+          __WEBPACK_IMPORTED_MODULE_1_react_transition_group__["CSSTransition"],
+          {
+            classNames: 'count',
+            key: count,
+            timeout: { enter: 500, exit: 0 }
+          },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_react_transition_group__["CSSTransition"],
-            {
-              classNames: 'count',
-              key: count,
-              timeout: { enter: 500, exit: 500 }
-            },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              null,
-              count
-            )
+            'span',
+            null,
+            count
           )
-        ),
-        dish.name,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'span',
-          { className: 'price' },
-          Object(__WEBPACK_IMPORTED_MODULE_2__utils_helpers__["a" /* formatPrice */])(count * dish.price)
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { onClick: function onClick() {
-              return props.removeFromOrder(dishId);
-            } },
-          '\xD7'
         )
+      ),
+      dish.name,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'span',
+        { className: 'price' },
+        Object(__WEBPACK_IMPORTED_MODULE_2__utils_helpers__["a" /* formatPrice */])(count * dish.price)
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'button',
+        { onClick: function onClick() {
+            return props.removeFromOrder(dishId);
+          } },
+        '\xD7'
       )
     )
   );
@@ -52403,7 +52399,7 @@ var Order = function Order(props) {
   var orderIds = Object.keys(props.order);
   var total = orderIds.reduce(function (prevTotal, dishId) {
     var dish = props.dishes.find(function (dishItem) {
-      return dishItem.id === dishId;
+      return dishItem.id === Number(dishId);
     });
     var count = props.order[dishId];
     var isAvailable = dish && dish.status === 'available';
